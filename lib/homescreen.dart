@@ -48,29 +48,11 @@ class _WeatherHomeState extends State<WeatherHome> {
           child: Visibility(
             visible: isLoaded,
             replacement: Center(
-              child: SfRadialGauge(axes: <RadialAxis>[
-                RadialAxis(
-                  showLabels: true,
-                  showTicks: true,
-                  startAngle: 180,
-                  endAngle: 00,
-                  radiusFactor: 0.7,
-                  canScaleToFit: true,
-                  axisLineStyle: const AxisLineStyle(
-                    thickness: 0.1,
-                    color: Colors.red,
-                    thicknessUnit: GaugeSizeUnit.factor,
-                    cornerStyle: CornerStyle.startCurve,
-                  ),
-                  pointers: const <GaugePointer>[
-                    RangePointer(
-                        value: 50,
-                        width: 0.1,
-                        sizeUnit: GaugeSizeUnit.factor,
-                        cornerStyle: CornerStyle.bothCurve)
-                  ],
-                )
-              ]),
+              child: Image.asset(
+                'asset/images/c.png',
+                width: 100,
+                height: 100,
+              ),
             ),
             child: Column(
               children: [
