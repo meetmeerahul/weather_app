@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'homescreen.dart';
+import 'package:weather_app/homescreen.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -7,6 +7,6 @@ void main() {
     theme: ThemeData(
       primaryColor: Colors.teal,
     ),
-    home: WeatherHome(),
+    home: const WeatherHome(),
   ));
 }

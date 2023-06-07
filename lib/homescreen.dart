@@ -33,270 +33,271 @@ class _WeatherHomeState extends State<WeatherHome> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: Container(
-        height: double.infinity,
-        width: double.infinity,
-        padding: const EdgeInsets.all(10),
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-              begin: Alignment.bottomLeft,
-              end: Alignment.topRight,
-              colors: [Colors.teal, Colors.blue, Colors.green]),
-        ),
-        child: Visibility(
-          visible: isLoaded,
-          replacement: Center(
-            child: SfRadialGauge(axes: <RadialAxis>[
-              RadialAxis(
-                showLabels: true,
-                showTicks: true,
-                startAngle: 180,
-                endAngle: 00,
-                radiusFactor: 0.7,
-                canScaleToFit: true,
-                axisLineStyle: const AxisLineStyle(
-                  thickness: 0.1,
-                  color: Colors.red,
-                  thicknessUnit: GaugeSizeUnit.factor,
-                  cornerStyle: CornerStyle.startCurve,
-                ),
-                pointers: const <GaugePointer>[
-                  RangePointer(
-                      value: 50,
-                      width: 0.1,
-                      sizeUnit: GaugeSizeUnit.factor,
-                      cornerStyle: CornerStyle.bothCurve)
-                ],
-              )
-            ]),
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        body: Container(
+          height: double.infinity,
+          width: double.infinity,
+          padding: const EdgeInsets.all(10),
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.bottomLeft,
+                end: Alignment.topRight,
+                colors: [Colors.teal, Colors.blue, Colors.green]),
           ),
-          child: Column(
-            children: [
-              Container(
-                width: MediaQuery.of(context).size.width * 0.85,
-                height: MediaQuery.of(context).size.height * 0.09,
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.2),
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(20),
+          child: Visibility(
+            visible: isLoaded,
+            replacement: Center(
+              child: SfRadialGauge(axes: <RadialAxis>[
+                RadialAxis(
+                  showLabels: true,
+                  showTicks: true,
+                  startAngle: 180,
+                  endAngle: 00,
+                  radiusFactor: 0.7,
+                  canScaleToFit: true,
+                  axisLineStyle: const AxisLineStyle(
+                    thickness: 0.1,
+                    color: Colors.red,
+                    thicknessUnit: GaugeSizeUnit.factor,
+                    cornerStyle: CornerStyle.startCurve,
                   ),
-                ),
-                child: Center(
-                  child: TextFormField(
-                    controller: controller,
-                    onFieldSubmitted: (String s) {
-                      setState(() {
-                        cityName = s;
-                        getCItyWeather(cityName);
-                        controller.clear();
-                        isLoaded = false;
-                      });
-                    },
-                    cursorColor: Colors.white,
-                    style: const TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white),
-                    decoration: InputDecoration(
-                        hintText: 'Cityname',
-                        hintStyle: TextStyle(
-                            fontSize: 18,
+                  pointers: const <GaugePointer>[
+                    RangePointer(
+                        value: 50,
+                        width: 0.1,
+                        sizeUnit: GaugeSizeUnit.factor,
+                        cornerStyle: CornerStyle.bothCurve)
+                  ],
+                )
+              ]),
+            ),
+            child: Column(
+              children: [
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.85,
+                  height: MediaQuery.of(context).size.height * 0.09,
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  decoration: BoxDecoration(
+                    color: Colors.black.withOpacity(0.2),
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(20),
+                    ),
+                  ),
+                  child: Center(
+                    child: TextFormField(
+                      controller: controller,
+                      onFieldSubmitted: (String s) {
+                        setState(() {
+                          cityName = s;
+                          getCItyWeather(cityName);
+                          controller.clear();
+                          isLoaded = false;
+                        });
+                      },
+                      cursorColor: Colors.white,
+                      style: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white),
+                      decoration: InputDecoration(
+                          hintText: 'Cityname',
+                          hintStyle: TextStyle(
+                              fontSize: 18,
+                              color: Colors.white.withOpacity(0.7),
+                              fontWeight: FontWeight.w600),
+                          prefixIcon: Icon(
+                            Icons.search_rounded,
+                            size: 20,
                             color: Colors.white.withOpacity(0.7),
-                            fontWeight: FontWeight.w600),
-                        prefixIcon: Icon(
-                          Icons.search_rounded,
-                          size: 20,
-                          color: Colors.white.withOpacity(0.7),
+                          ),
+                          border: InputBorder.none),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      const Icon(
+                        Icons.pin_drop,
+                        color: Colors.red,
+                        size: 40,
+                      ),
+                      Text(
+                        cityName,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  width: double.infinity,
+                  height: MediaQuery.of(context).size.height * 0.12,
+                  margin: const EdgeInsets.symmetric(vertical: 10),
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(20),
+                    ),
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.grey.shade900,
+                          offset: const Offset(1, 2),
+                          blurRadius: 3,
+                          spreadRadius: 1)
+                    ],
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        Image(
+                          image: const AssetImage('asset/images/t.png'),
+                          height: 50,
+                          width: MediaQuery.of(context).size.width * .09,
                         ),
-                        border: InputBorder.none),
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    const Icon(
-                      Icons.pin_drop,
-                      color: Colors.red,
-                      size: 40,
+                        const SizedBox(
+                          width: 30,
+                        ),
+                        Text(
+                          'Temparature ${temp.toInt()} °C',
+                          style: const TextStyle(
+                              fontWeight: FontWeight.w600, fontSize: 20),
+                        )
+                      ],
                     ),
-                    Text(
-                      cityName,
-                      overflow: TextOverflow.ellipsis,
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                Container(
+                  width: double.infinity,
+                  height: MediaQuery.of(context).size.height * 0.12,
+                  margin: const EdgeInsets.symmetric(vertical: 10),
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(20),
                     ),
-                  ],
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Container(
-                width: double.infinity,
-                height: MediaQuery.of(context).size.height * 0.12,
-                margin: const EdgeInsets.symmetric(vertical: 10),
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(20),
-                  ),
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                        color: Colors.grey.shade900,
-                        offset: const Offset(1, 2),
-                        blurRadius: 3,
-                        spreadRadius: 1)
-                  ],
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    children: [
-                      Image(
-                        image: const AssetImage('asset/images/t.png'),
-                        height: 50,
-                        width: MediaQuery.of(context).size.width * .09,
-                      ),
-                      const SizedBox(
-                        width: 30,
-                      ),
-                      Text(
-                        'Temparature ${temp.toInt()} °C',
-                        style: const TextStyle(
-                            fontWeight: FontWeight.w600, fontSize: 20),
-                      )
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.grey.shade900,
+                          offset: Offset(1, 2),
+                          blurRadius: 3,
+                          spreadRadius: 1)
                     ],
                   ),
-                ),
-              ),
-              Container(
-                width: double.infinity,
-                height: MediaQuery.of(context).size.height * 0.12,
-                margin: const EdgeInsets.symmetric(vertical: 10),
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(20),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        Image(
+                          image: const AssetImage('asset/images/c.png'),
+                          height: 50,
+                          width: MediaQuery.of(context).size.width * .09,
+                        ),
+                        const SizedBox(
+                          width: 30,
+                        ),
+                        Text(
+                          'Cloud Cover ${cloudCover.toInt()}',
+                          style: const TextStyle(
+                              fontWeight: FontWeight.w600, fontSize: 20),
+                        )
+                      ],
+                    ),
                   ),
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                        color: Colors.grey.shade900,
-                        offset: Offset(1, 2),
-                        blurRadius: 3,
-                        spreadRadius: 1)
-                  ],
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    children: [
-                      Image(
-                        image: const AssetImage('asset/images/c.png'),
-                        height: 50,
-                        width: MediaQuery.of(context).size.width * .09,
-                      ),
-                      const SizedBox(
-                        width: 30,
-                      ),
-                      Text(
-                        'Cloud Cover ${cloudCover.toInt()}',
-                        style: const TextStyle(
-                            fontWeight: FontWeight.w600, fontSize: 20),
-                      )
+                Container(
+                  width: double.infinity,
+                  height: MediaQuery.of(context).size.height * 0.12,
+                  margin: const EdgeInsets.symmetric(vertical: 10),
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(20),
+                    ),
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.grey.shade900,
+                          offset: Offset(1, 2),
+                          blurRadius: 3,
+                          spreadRadius: 1)
                     ],
                   ),
-                ),
-              ),
-              Container(
-                width: double.infinity,
-                height: MediaQuery.of(context).size.height * 0.12,
-                margin: const EdgeInsets.symmetric(vertical: 10),
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(20),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        Image(
+                          image: AssetImage('asset/images/h.png'),
+                          height: 50,
+                          width: MediaQuery.of(context).size.width * .09,
+                        ),
+                        const SizedBox(
+                          width: 30,
+                        ),
+                        Text(
+                          'Humidity ${humid.toInt()}',
+                          style: const TextStyle(
+                              fontWeight: FontWeight.w600, fontSize: 20),
+                        )
+                      ],
+                    ),
                   ),
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                        color: Colors.grey.shade900,
-                        offset: Offset(1, 2),
-                        blurRadius: 3,
-                        spreadRadius: 1)
-                  ],
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    children: [
-                      Image(
-                        image: AssetImage('asset/images/h.png'),
-                        height: 50,
-                        width: MediaQuery.of(context).size.width * .09,
-                      ),
-                      const SizedBox(
-                        width: 30,
-                      ),
-                      Text(
-                        'Humidity ${humid.toInt()}',
-                        style: const TextStyle(
-                            fontWeight: FontWeight.w600, fontSize: 20),
-                      )
+                Container(
+                  width: double.infinity,
+                  height: MediaQuery.of(context).size.height * 0.12,
+                  margin: const EdgeInsets.symmetric(vertical: 10),
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(20),
+                    ),
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.grey.shade900,
+                          offset: Offset(1, 2),
+                          blurRadius: 3,
+                          spreadRadius: 1)
                     ],
                   ),
-                ),
-              ),
-              Container(
-                width: double.infinity,
-                height: MediaQuery.of(context).size.height * 0.12,
-                margin: const EdgeInsets.symmetric(vertical: 10),
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(20),
-                  ),
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                        color: Colors.grey.shade900,
-                        offset: Offset(1, 2),
-                        blurRadius: 3,
-                        spreadRadius: 1)
-                  ],
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    children: [
-                      Image(
-                        image: AssetImage('asset/images/b.png'),
-                        height: 50,
-                        width: MediaQuery.of(context).size.width * .09,
-                      ),
-                      const SizedBox(
-                        width: 30,
-                      ),
-                      Text(
-                        'Pressure ${pressure} Hpa',
-                        style: const TextStyle(
-                            fontWeight: FontWeight.w600, fontSize: 20),
-                      )
-                    ],
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        Image(
+                          image: AssetImage('asset/images/b.png'),
+                          height: 50,
+                          width: MediaQuery.of(context).size.width * .09,
+                        ),
+                        const SizedBox(
+                          width: 30,
+                        ),
+                        Text(
+                          'Pressure $pressure Hpa',
+                          style: const TextStyle(
+                              fontWeight: FontWeight.w600, fontSize: 20),
+                        )
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
-    ));
+    );
   }
 
   void getCurrentLocation() async {
@@ -328,9 +329,8 @@ class _WeatherHomeState extends State<WeatherHome> {
       setState(() {
         isLoaded = true;
       });
-      print(data);
     } else {
-      print(response.statusCode);
+      isLoaded = false;
     }
   }
 
@@ -348,9 +348,10 @@ class _WeatherHomeState extends State<WeatherHome> {
       setState(() {
         isLoaded = true;
       });
-      print(data);
     } else {
-      print(response.statusCode);
+      // isLoaded = false;
+      // ignore: use_build_context_synchronously
+      showAlertDialog(context);
     }
   }
 
@@ -377,5 +378,37 @@ class _WeatherHomeState extends State<WeatherHome> {
     // TODO: implement dispose
     controller.dispose();
     super.dispose();
+  }
+
+  showAlertDialog(BuildContext context) {
+    // set up the button
+    Widget okButton = TextButton(
+      child: const Text("OK"),
+      onPressed: () {
+        Navigator.pushAndRemoveUntil<void>(
+          context,
+          MaterialPageRoute<void>(
+              builder: (BuildContext context) => const WeatherHome()),
+          ModalRoute.withName('/'),
+        );
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: const Text("An Error Occured"),
+      content: const Text("City Not Found...."),
+      actions: [
+        okButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
   }
 }
